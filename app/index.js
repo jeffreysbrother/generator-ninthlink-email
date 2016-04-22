@@ -72,10 +72,6 @@ module.exports = generators.Base.extend({
         name: 'Bootstrap',
         value: 'includeBootstrap',
         checked: true
-      }, {
-        name: 'Modernizr',
-        value: 'includeModernizr',
-        checked: true
       }]
     }, {
       type: 'confirm',
@@ -98,7 +94,6 @@ module.exports = generators.Base.extend({
       // we change a bit this way of doing to automatically do this in the self.prompt() method.
       this.includeSass = hasFeature('includeSass');
       this.includeBootstrap = hasFeature('includeBootstrap');
-      this.includeModernizr = hasFeature('includeModernizr');
       this.includeJQuery = answers.includeJQuery;
 
       done();
@@ -186,10 +181,6 @@ module.exports = generators.Base.extend({
         bowerJson.dependencies['jquery'] = '~2.1.1';
       }
 
-      if (this.includeModernizr) {
-        bowerJson.dependencies['modernizr'] = '~2.8.1';
-      }
-
       this.fs.writeJSON('bower.json', bowerJson);
       this.fs.copy(
         this.templatePath('bowerrc'),
@@ -266,7 +257,6 @@ module.exports = generators.Base.extend({
           appname: this.appname,
           includeSass: this.includeSass,
           includeBootstrap: this.includeBootstrap,
-          includeModernizr: this.includeModernizr,
           includeJQuery: this.includeJQuery,
           bsPath: bsPath,
           bsPlugins: [
