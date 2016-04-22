@@ -12,11 +12,6 @@ module.exports = generators.Base.extend({
 
     generators.Base.apply(this, arguments);
 
-    this.option('skip-install-message', {
-      desc: 'Skips the message after the installation of dependencies',
-      type: Boolean
-    });
-
     this.option('test-framework', {
       desc: 'Test framework to be invoked',
       type: String,
@@ -251,7 +246,6 @@ module.exports = generators.Base.extend({
 
   install: function () {
     this.installDependencies({
-      skipMessage: this.options['skip-install-message'],
       skipInstall: this.options['skip-install']
     });
   },
