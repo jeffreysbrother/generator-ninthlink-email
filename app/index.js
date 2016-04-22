@@ -60,16 +60,16 @@ module.exports = generators.Base.extend({
       this.log(yosay('Hey you wanna make a damn email? Well, that\'s SWELL.'));
     }
 
-    var prompts = [{
-      type: 'checkbox',
-      name: 'features',
-      message: 'What more would you like?',
-      choices: [{
-        name: 'Sass',
-        value: 'includeSass',
-        checked: true
-      }]
-    }];
+    // var prompts = [{
+    //   type: 'checkbox',
+    //   name: 'features',
+    //   message: 'What more would you like?',
+    //   choices: [{
+    //     name: 'Sass',
+    //     value: 'includeSass',
+    //     checked: true
+    //   }]
+    // }];
 
     this.prompt(prompts, function (answers) {
       var features = answers.features;
@@ -80,7 +80,8 @@ module.exports = generators.Base.extend({
 
       // manually deal with the response, get back and store the results.
       // we change a bit this way of doing to automatically do this in the self.prompt() method.
-      this.includeSass = hasFeature('includeSass');
+      
+      // this.includeSass = hasFeature('includeSass');
 
       done();
     }.bind(this));
@@ -95,7 +96,7 @@ module.exports = generators.Base.extend({
           date: (new Date).toISOString().split('T')[0],
           name: this.pkg.name,
           version: this.pkg.version,
-          includeSass: this.includeSass,
+          // includeSass: this.includeSass,
           includeBabel: this.options['babel'],
           testFramework: this.options['test-framework']
         }
@@ -107,7 +108,7 @@ module.exports = generators.Base.extend({
         this.templatePath('_package.json'),
         this.destinationPath('package.json'),
         {
-          includeSass: this.includeSass,
+          // includeSass: this.includeSass,
           includeBabel: this.options['babel']
         }
       );
@@ -170,12 +171,6 @@ module.exports = generators.Base.extend({
     styles: function () {
       var css = 'main';
 
-      if (this.includeSass) {
-        css += '.scss';
-      } else {
-        css += '.css';
-      }
-
       this.fs.copyTpl(
         this.templatePath(css),
         this.destinationPath('app/styles/' + css)
@@ -197,7 +192,7 @@ module.exports = generators.Base.extend({
         this.destinationPath('app/index.html'),
         {
           appname: this.appname,
-          includeSass: this.includeSass,
+          // includeSass: this.includeSass,
           bsPath: bsPath,
           bsPlugins: [
             'affix',
@@ -253,14 +248,5 @@ module.exports = generators.Base.extend({
       src: 'app/index.html'
     });
 
-    if (this.includeSass) {
-      // wire Bower packages to .scss
-      wiredep({
-        bowerJson: bowerJson,
-        directory: 'bower_components',
-        ignorePath: /^(\.\.\/)+/,
-        src: 'app/styles/*.scss'
-      });
-    }
   }
 });
