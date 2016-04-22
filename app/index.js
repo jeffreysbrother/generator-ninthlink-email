@@ -259,12 +259,12 @@ module.exports = generators.Base.extend({
           ]
         }
       );
-    },
-
-    misc: function () {
-      mkdirp('app/images');
-      mkdirp('app/fonts');
     }
+
+    // misc: function () {
+    //   mkdirp('app/images');
+    //   mkdirp('app/fonts');
+    // }
   },
 
   install: function () {
