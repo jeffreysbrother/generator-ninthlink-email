@@ -140,34 +140,34 @@ module.exports = generators.Base.extend({
         dependencies: {}
       };
 
-      if (this.includeBootstrap) {
-        if (this.includeSass) {
-          bowerJson.dependencies['bootstrap-sass'] = '~3.3.5';
-          bowerJson.overrides = {
-            'bootstrap-sass': {
-              'main': [
-                'assets/stylesheets/_bootstrap.scss',
-                'assets/fonts/bootstrap/*',
-                'assets/javascripts/bootstrap.js'
-              ]
-            }
-          };
-        } else {
-          bowerJson.dependencies['bootstrap'] = '~3.3.5';
-          bowerJson.overrides = {
-            'bootstrap': {
-              'main': [
-                'less/bootstrap.less',
-                'dist/css/bootstrap.css',
-                'dist/js/bootstrap.js',
-                'dist/fonts/*'
-              ]
-            }
-          };
-        }
-      } else if (this.includeJQuery) {
-        bowerJson.dependencies['jquery'] = '~2.1.1';
-      }
+      // if (this.includeBootstrap) {
+      //   if (this.includeSass) {
+      //     bowerJson.dependencies['bootstrap-sass'] = '~3.3.5';
+      //     bowerJson.overrides = {
+      //       'bootstrap-sass': {
+      //         'main': [
+      //           'assets/stylesheets/_bootstrap.scss',
+      //           'assets/fonts/bootstrap/*',
+      //           'assets/javascripts/bootstrap.js'
+      //         ]
+      //       }
+      //     };
+      //   } else {
+      //     bowerJson.dependencies['bootstrap'] = '~3.3.5';
+      //     bowerJson.overrides = {
+      //       'bootstrap': {
+      //         'main': [
+      //           'less/bootstrap.less',
+      //           'dist/css/bootstrap.css',
+      //           'dist/js/bootstrap.js',
+      //           'dist/fonts/*'
+      //         ]
+      //       }
+      //     };
+      //   }
+      // } else if (this.includeJQuery) {
+      //   bowerJson.dependencies['jquery'] = '~2.1.1';
+      // }
 
       this.fs.writeJSON('bower.json', bowerJson);
       this.fs.copy(
@@ -183,23 +183,23 @@ module.exports = generators.Base.extend({
       );
     },
 
-    styles: function () {
-      var css = 'main';
-
-      if (this.includeSass) {
-        css += '.scss';
-      } else {
-        css += '.css';
-      }
-
-      this.fs.copyTpl(
-        this.templatePath(css),
-        this.destinationPath('app/styles/' + css),
-        {
-          includeBootstrap: this.includeBootstrap
-        }
-      );
-    },
+    // styles: function () {
+    //   var css = 'main';
+    // 
+    //   if (this.includeSass) {
+    //     css += '.scss';
+    //   } else {
+    //     css += '.css';
+    //   }
+    // 
+    //   this.fs.copyTpl(
+    //     this.templatePath(css),
+    //     this.destinationPath('app/styles/' + css),
+    //     {
+    //       includeBootstrap: this.includeBootstrap
+    //     }
+    //   );
+    // },
 
     html: function () {
       var bsPath;
