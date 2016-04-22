@@ -1,103 +1,240 @@
-<!doctype html>
-<html<% if (includeModernizr) { %> class="no-js"<% } %> lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><%= appname %></title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- necessary for mobile (despite having no media queries) -->
+  <title>ThermoSpas</title>
+  <style type="text/css">
 
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <!-- Place favicon.ico in the root directory -->
+    /*RESET STYLES*/
+    body, #bodyTable, #bodyCell {height:100% !important; margin:0; padding:0; width:100% !important;}
+    table{border-collapse:collapse;}
+    img, a img{border:0; outline:none; text-decoration:none;}
+    h1, h2, h3, h4, h5, h6, p, div, td, table {margin:0; padding:0;}
 
-    <!-- build:css styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- endbower -->
-    <!-- endbuild -->
+    /*CLIENT-SPECIFIC STYLES*/
+    ReadMsgBody{width:100%;} .ExternalClass{width:100%;} /*hotmail/outlook*/
+    .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div{line-height: 100%;} /*homail/outlook*/
+    table, td{mso-table-lspace:0pt;} /*Outlook 2007 and up*/
+    #outlook a{padding:0;} /*force Outlook 2007 and up provide a "view in browser message"*/
+    img{-ms-interpolation-mode: bicubic;} /*force IE to smoothly render resized images*/
+    body, table, td, p, a, li, blockquote{-ms-text-size-adjust:100%; -webkit-text-size-adjust:100%;} /*prevent from changing declared text sizes*/
 
-    <!-- build:css styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
-    <% if (includeModernizr) { %>
-    <!-- build:js scripts/vendor/modernizr.js -->
-    <script src="/bower_components/modernizr/modernizr.js"></script>
-    <!-- endbuild --><% } %>
-  </head>
-  <body>
-    <!--[if lt IE 10]>
-      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-    <% if (includeBootstrap) { %>
-    <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-        <h3 class="text-muted"><%= appname %></h3>
-      </div>
+    /*GENERAL STYLES*/
+    *{font-family: Arial, sans-serif; line-height: 1.2em;}
+    #header-content, #footer-black{background-color:#000;}
+    .header-text, .footer-logo, #social-icons{color:#fff; }
+    .padding-class {padding: .9em;}
+    #inner-content, #contain {border-left: 1px solid #000; border-right: 1px solid #000; }
+    #bodyTable {margin: 20px 0;}   /* set top/bottom margin of containing table*/
+    p, h4 {color: #000;}   /* this rule resolves the issue of text displaying as purple in gmail */
+    p {margin-bottom: 1em; }
+    td.padding-class p.last-paragraph {margin-bottom: 0;}
+    /*this fixes the issue of superscipt text affecting line-height*/
+    sup { vertical-align: top; font-size: 0.6em; }
 
-      <div class="jumbotron">
-        <h1>'Allo, 'Allo!</h1>
-        <p class="lead">Always a pleasure scaffolding your apps.</p>
-        <p><a class="btn btn-lg btn-success" href="#">Splendid!</a></p>
-      </div>
+    /*header section styles*/
+    #header-content {height: 5.2em;}
+    .header-text {font-weight:lighter;}
+    .logo {padding: .3em 1.2em; border: 1px solid #fff; width: 3em; margin-left:.5em;}
 
-      <div class="row marketing">
-        <div class="col-lg-6">
-          <h4>HTML5 Boilerplate</h4>
-          <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
-          <% if (includeSass) { %>
-          <h4>Sass</h4>
-          <p>Sass is the most mature, stable, and powerful professional grade CSS extension language in the world.</p>
-          <% } %>
-          <h4>Bootstrap</h4>
-          <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p><% if (includeModernizr) { %>
-          <h4>Modernizr</h4>
-          <p>Modernizr is an open-source JavaScript library that helps you build the next generation of HTML5 and CSS3-powered websites.</p>
-          <% } %>
-        </div>
-      </div>
+    /*button styles*/
+    #CTA {padding-top: 15px; padding-bottom: 15px;}
+    .CTA-button {background-color: #000; height: 2.2em; margin: 1em 0; }
+    .CTA-button a {color: #fff; text-decoration: none; padding: 0 3.6em;} /* <--set width of button with padding */
 
-      <div class="footer">
-        <p>♥ from the Yeoman team</p>
-      </div>
-    </div>
-    <% } else { %>
-    <div class="hero-unit">
-      <h1>'Allo, 'Allo!</h1>
-      <p>You now have</p>
-      <ul>
-        <li>HTML5 Boilerplate</li><% if (includeSass) { %>
-        <li>Sass</li><% } if (includeModernizr) { %>
-        <li>Modernizr</li><% } if (includeJQuery) { %>
-        <li>jQuery</li><% } %>
-      </ul>
-    </div>
-    <% } %>
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <script>
-      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      e.src='https://www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X');ga('send','pageview');
-    </script>
+    /*"content" section*/
+    a.phone {color: #000; text-decoration: underline;}
+    p.small-bold {font-weight: bold; margin-bottom: 0;}
 
-    <!-- build:js scripts/vendor.js -->
-    <!-- bower:js -->
-    <!-- endbower -->
-    <!-- endbuild -->
-    <% if (includeBootstrap) { %>
-    <!-- build:js scripts/plugins.js -->
-<% bsPlugins.forEach(function (plugin) { -%>
-    <script src="<%= bsPath + plugin %>.js"></script>
-<% }) -%>
-    <!-- endbuild -->
-    <% } %>
-    <!-- build:js scripts/main.js -->
-    <script src="scripts/main.js"></script>
-    <!-- endbuild -->
-  </body>
+    /*quad section styles*/
+    .quad-padding {padding: .7em;}
+    .box {width: 3em; height: 3em; background-color: #000; margin: .1em;}
+    #quad-content {background-color: #bbb;}
+    #quad {padding: 1em 0;}
+    .important h4 {margin-bottom: .2em;}
+    .important {padding-left: .7em;}
+    .important p a {color: #000;}
+    /*.important p {font-size: 12px;}*/
+
+    /*footer styles*/
+    /*#footer-info {font-size: 12px;}*/
+    .footer-logo {border: 1px solid #fff; width: 4.9em; padding: .3em 0; margin-top: .8em; margin-bottom: .5em;}
+    .circle {height: 1.1em; width: 1.1em; background-color: #bbb; display: inline-block; border-radius: 100%; margin-bottom: .8em;}
+        /*eliminate address link generated by Apple Mail*/
+        .address-fix a {color: #000 !important; text-decoration: none;}
+
+    /*shift fonts over to ems for font-sizes and formatting, and rems for modules*/
+    html {font-size: 16px;}
+    .logo {font-size: 2em;}
+    h4 {font-size: 1em;}
+    p{font-size: 1em;}
+    .important p {font-size: .75em;}
+    #footer-info p {font-size: .6em;}
+    .CTA-content a {font-size: 1.1em;}
+
+    .header-rem{font-size: 1.3rem;}
+    .inner-rem{font-size: 1.4rem;}
+    .quad-rem{font-size: 1.4rem;}
+    .footer-rem{font-size: 1.6rem}
+
+  </style>
+</head>
+
+<body>
+  <center>
+    <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
+      <tr>
+        <td align="center" valign="top" id="bodyCell">
+          <!-- container table for email: all content will be nested within this table -->
+          <table border="0" cellpadding="0" cellspacing="0" width="100%" id="emailContainer">
+
+            <!--~~~~~~~~~~~~~~~~~~ 1. HEADER SECTION ~~~~~~~~~~~~~~~~~~-->
+            <tr>
+              <td align="center" valign="top" id="header" class="header-rem">
+
+                <table border="0" cellpadding="0" cellspacing="0" width="600" id="header-content">
+                  <tr>
+                    <td align="left" valign="middle" id="header-height">
+                      <h1 class="header-text logo">LOGO</h1>
+                    </td>
+                    <td align="center" valign="middle">
+                      <h4 class="header-text right">Share your ThermoSpas<sup>&reg;</sup><br />Hot Tub Experience</h4>
+                    </td>
+                  </tr>
+                </table>
+
+              </td>
+            </tr>
+
+            <!--~~~~~~~~~~~~~~~~~~ 2. "CONTENT" SECTION ~~~~~~~~~~~~~~~~~~-->
+            <tr>
+              <td align="center" valign="top" id="content">
+                <table border="0" cellpadding="0" cellspacing="0" width="600" id="inner-content" class="inner-rem">
+                  <tr>
+                    <td align="left" valign="top" class="padding-class text1">
+                      <p>Dear [Customer Name],</p>
+                      <p>We are looking forward to our appointment with you on [Appointment Date and Time]. At that time a ThermoSpas<sup>&reg;</sup> technician will be onsite to determine an ideal location for a hot tub and help you pick out the perfect ThermoSpas<sup>&reg;</sup> model for you!</p>
+
+                      <p class="small-bold">Your ThermoSpas<sup>&reg;</sup> Hot Tub</p>
+                      <p>Before we arrive, please take a few moments to look through the wide range of options and features included in our brochure. From customized deluxe LED lighting and stereo options to variable jet packages, we’re ready to help build the hot tub of your dreams.</p>
+
+                      <p class="small-bold">What to Expect from Your Appointment</p>
+                      <p>During the visit, our technician will inspect your location to make sure we can get a hot tub installed for you. Our technician will:</p>
+
+                      <ul>
+                        <li>Measure passageways for clearance and accessibility</li>
+                        <li>Inspect decking and flooring for adequate structural support</li>
+                        <li>Evaluate electrical requirements</li>
+                        <li>Discuss cost-saving ideas on the location and design of your hot tub</li>
+                        <li>Offer safety suggestions on the installation and usage</li>
+                        <li>Provide a written report that will assist in shopping, regardless of which hot tub you eventually choose</li>
+                      </ul>
+
+                      <p>To make sure we get the right hot tub selected, it is critical that all homeowners and individuals involved in the customization process be present for the entire visit. Our technician will be there for about 60 minutes to answer any questions you may have.</p>
+
+                      <p>Thank you and please call us with any questions!</p>
+
+                      <p>The ThermoSpas Team <br /><a class="phone" href="tel:1-800-876-0158">(800) 876-0158</a> Option 7</p>
+
+                    </td>
+                  </tr>
+                </table>
+
+              </td>
+            </tr>
+
+            <!--~~~~~~~~~~~~~~~~~~ 3. QUAD SECTION ~~~~~~~~~~~~~~~~~~-->
+            <tr>
+
+              <td align="center" valign="top">
+                <!-- the #contain table serves merely to add borders: see CSS rules for details -->
+                <table border="0" cellpadding="0" cellspacing="0" width="600" id="contain">
+                  <tr>
+
+                      <td align="center" valign="top" id="quad" class="quad-rem">
+                        <!-- set width of gray section below -->
+                        <table border="0" cellpadding="0" cellspacing="0" width="564" id="quad-content">
+                          <tr>
+                            <td class="quad-padding">
+                              <table border="0" cellpadding="0" cellspacing="0" id="quad-sections">
+                                <tr>
+                                  <td align="left" valign="middle">
+
+                                    <!-- INDUSTRY ICON PLACEHOLDERS -->
+                                    <table>
+                                      <tr>
+                                        <td><div class="box"></div></td>
+                                        <td><div class="box"></div></td>
+                                      </tr>
+                                      <tr>
+                                        <td><div class="box"></div></td>
+                                        <td><div class="box"></div></td>
+                                      </tr>
+                                    </table>
+
+                                  </td>
+
+                                  <td align="left" valign="top" width="75%" class="important">
+                                    <h4>Today’s ThermoSpas</h4>
+                                    <p>Today’s ThermoSpas brings a whole new level of service to home spa customers. As part of the Jacuzzi Group Worldwide family, ThermoSpas customers now enjoy the benefits of expanded industry knowledge and resources. The result is a truly customer-first experience to match its industry leading spas. Please visit the <a href="#">“Today’s ThermoSpas”</a> section of our website to learn more about our commitments to service and quality.</p>
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+              </td>
+            </tr>
+
+            <!--~~~~~~~~~~~~~~~~~~ 4. FOOTER SECTION ~~~~~~~~~~~~~~~~~~-->
+            <tr>
+              <td align="center" valign="top" id="footer" class="footer-rem">
+                <table border="0" cellpadding="0" cellspacing="0" width="600" id="footer-content">
+                  <tr>
+                    <td align="center" valign="middle" id="foot">
+                      <table border="0" cellpadding="0" cellspacing="0" width="100%" id="footer-black">
+
+                            <tr>
+                              <td align="center" valign="middle" id="footer-logo-container">
+                                <h4 class="footer-logo">LOGO</h4>
+                              </td>
+                            </tr>
+
+                            <!-- SOCIAL ICON PLACEHOLDERS -->
+                            <tr>
+                              <td align="center" valign="middle" id="social-icons">
+                                <div class="circle"></div>
+                                <div class="circle"></div>
+                                <div class="circle"></div>
+                                <div class="circle"></div>
+                              </td>
+                            </tr>
+
+                      </table>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td align="center" valign="top" id="footer-info" class="padding-class">
+                      <p class="address-fix">This email was sent by ThermoSpas Hot Tub Products<br />
+                      10 Research Parkway, Ste 300, Wallingford, CT<br />
+                      USA</p>
+                      <p>&copy; 2015 ThermoSpas Hot Tubs. All rights reserved.</p>
+                    </td>
+                  </tr>
+
+                </table>
+              </td>
+            </tr>
+
+          </table>
+        </td>
+      </tr>
+    </table>
+  </center>
+</body>
 </html>
