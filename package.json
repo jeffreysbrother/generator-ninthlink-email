@@ -1,6 +1,6 @@
 {
-  "name": "generator-webapp",
-  "version": "2.0.0",
+  "name": "generator-ninthlink-email",
+  "version": "0.0.0",
   "description": "Scaffold out a front-end web app",
   "license": "BSD-2-Clause",
   "repository": "yeoman/generator-webapp",
@@ -18,6 +18,9 @@
   ],
   "keywords": [
     "yeoman-generator",
+    "generator-ninthlink-email",
+    "ninthlink",
+    "james cool"
     "web",
     "app",
     "front-end",
