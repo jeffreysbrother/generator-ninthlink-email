@@ -68,23 +68,7 @@ module.exports = generators.Base.extend({
         name: 'Sass',
         value: 'includeSass',
         checked: true
-      }, {
-        name: 'Bootstrap',
-        value: 'includeBootstrap',
-        checked: true
-      }, {
-        name: 'Modernizr',
-        value: 'includeModernizr',
-        checked: true
       }]
-    }, {
-      type: 'confirm',
-      name: 'includeJQuery',
-      message: 'Would you like to include jQuery?',
-      default: true,
-      when: function (answers) {
-        return answers.features.indexOf('includeBootstrap') === -1;
-      }
     }];
 
     this.prompt(prompts, function (answers) {
@@ -97,8 +81,6 @@ module.exports = generators.Base.extend({
       // manually deal with the response, get back and store the results.
       // we change a bit this way of doing to automatically do this in the self.prompt() method.
       this.includeSass = hasFeature('includeSass');
-      this.includeBootstrap = hasFeature('includeBootstrap');
-      this.includeModernizr = hasFeature('includeModernizr');
       this.includeJQuery = answers.includeJQuery;
 
       done();
@@ -115,7 +97,6 @@ module.exports = generators.Base.extend({
           name: this.pkg.name,
           version: this.pkg.version,
           includeSass: this.includeSass,
-          includeBootstrap: this.includeBootstrap,
           includeBabel: this.options['babel'],
           testFramework: this.options['test-framework']
         }
@@ -156,39 +137,6 @@ module.exports = generators.Base.extend({
         private: true,
         dependencies: {}
       };
-
-      if (this.includeBootstrap) {
-        if (this.includeSass) {
-          bowerJson.dependencies['bootstrap-sass'] = '~3.3.5';
-          bowerJson.overrides = {
-            'bootstrap-sass': {
-              'main': [
-                'assets/stylesheets/_bootstrap.scss',
-                'assets/fonts/bootstrap/*',
-                'assets/javascripts/bootstrap.js'
-              ]
-            }
-          };
-        } else {
-          bowerJson.dependencies['bootstrap'] = '~3.3.5';
-          bowerJson.overrides = {
-            'bootstrap': {
-              'main': [
-                'less/bootstrap.less',
-                'dist/css/bootstrap.css',
-                'dist/js/bootstrap.js',
-                'dist/fonts/*'
-              ]
-            }
-          };
-        }
-      } else if (this.includeJQuery) {
-        bowerJson.dependencies['jquery'] = '~2.1.1';
-      }
-
-      if (this.includeModernizr) {
-        bowerJson.dependencies['modernizr'] = '~2.8.1';
-      }
 
       this.fs.writeJSON('bower.json', bowerJson);
       this.fs.copy(
@@ -231,10 +179,7 @@ module.exports = generators.Base.extend({
 
       this.fs.copyTpl(
         this.templatePath(css),
-        this.destinationPath('app/styles/' + css),
-        {
-          includeBootstrap: this.includeBootstrap
-        }
+        this.destinationPath('app/styles/' + css)
       );
     },
 
@@ -248,25 +193,12 @@ module.exports = generators.Base.extend({
     html: function () {
       var bsPath;
 
-      // path prefix for Bootstrap JS files
-      if (this.includeBootstrap) {
-        bsPath = '/bower_components/';
-
-        if (this.includeSass) {
-          bsPath += 'bootstrap-sass/assets/javascripts/bootstrap/';
-        } else {
-          bsPath += 'bootstrap/js/';
-        }
-      }
-
       this.fs.copyTpl(
         this.templatePath('index.html'),
         this.destinationPath('app/index.html'),
         {
           appname: this.appname,
           includeSass: this.includeSass,
-          includeBootstrap: this.includeBootstrap,
-          includeModernizr: this.includeModernizr,
           includeJQuery: this.includeJQuery,
           bsPath: bsPath,
           bsPlugins: [
@@ -319,7 +251,6 @@ module.exports = generators.Base.extend({
     wiredep({
       bowerJson: bowerJson,
       directory: 'bower_components',
-      exclude: ['bootstrap-sass', 'bootstrap.js'],
       ignorePath: /^(\.\.\/)*\.\./,
       src: 'app/index.html'
     });
