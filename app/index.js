@@ -57,7 +57,7 @@ module.exports = generators.Base.extend({
     var done = this.async();
 
     if (!this.options['skip-welcome-message']) {
-      this.log(yosay('Hey you wanna make a damn email? Well, that\'s SWELL.'));
+      this.log(yosay('Hey you wanna make a damn email?? Well, that\'s SWELL.'));
     }
 
     // var prompts = [{
