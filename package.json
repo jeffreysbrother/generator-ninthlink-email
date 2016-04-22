@@ -21,12 +21,10 @@
     "generator-ninthlink-email",
     "ninthlink",
     "james cool",
+    "inline-css",
     "web",
     "app",
     "front-end",
-    "h5bp",
-    "modernizr",
-    "jquery",
     "gulp"
   ],
   "dependencies": {

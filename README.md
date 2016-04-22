@@ -2,8 +2,6 @@
 
 > [Yeoman](http://yeoman.io) generator that scaffolds out a front-end web app using [gulp](http://gulpjs.com/) for the build process
 
-![](screenshot.png)
-
 
 ## Features
 
