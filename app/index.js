@@ -213,13 +213,6 @@ module.exports = generators.Base.extend({
       );
     },
 
-    // scripts: function () {
-    //   this.fs.copy(
-    //     this.templatePath('main.js'),
-    //     this.destinationPath('app/scripts/main.js')
-    //   );
-    // },
-
     html: function () {
       var bsPath;
 
@@ -261,10 +254,6 @@ module.exports = generators.Base.extend({
       );
     }
 
-    // misc: function () {
-    //   mkdirp('app/images');
-    //   mkdirp('app/fonts');
-    // }
   },
 
   install: function () {
