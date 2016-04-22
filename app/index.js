@@ -81,7 +81,6 @@ module.exports = generators.Base.extend({
       // manually deal with the response, get back and store the results.
       // we change a bit this way of doing to automatically do this in the self.prompt() method.
       this.includeSass = hasFeature('includeSass');
-      this.includeJQuery = answers.includeJQuery;
 
       done();
     }.bind(this));
@@ -199,7 +198,6 @@ module.exports = generators.Base.extend({
         {
           appname: this.appname,
           includeSass: this.includeSass,
-          includeJQuery: this.includeJQuery,
           bsPath: bsPath,
           bsPlugins: [
             'affix',
