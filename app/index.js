@@ -213,12 +213,12 @@ module.exports = generators.Base.extend({
       );
     },
 
-    scripts: function () {
-      this.fs.copy(
-        this.templatePath('main.js'),
-        this.destinationPath('app/scripts/main.js')
-      );
-    },
+    // scripts: function () {
+    //   this.fs.copy(
+    //     this.templatePath('main.js'),
+    //     this.destinationPath('app/scripts/main.js')
+    //   );
+    // },
 
     html: function () {
       var bsPath;
