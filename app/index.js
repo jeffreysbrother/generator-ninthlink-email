@@ -12,11 +12,6 @@ module.exports = generators.Base.extend({
 
     generators.Base.apply(this, arguments);
 
-    this.option('skip-welcome-message', {
-      desc: 'Skips the welcome message',
-      type: Boolean
-    });
-
     this.option('skip-install-message', {
       desc: 'Skips the message after the installation of dependencies',
       type: Boolean
@@ -56,9 +51,7 @@ module.exports = generators.Base.extend({
   prompting: function () {
     var done = this.async();
 
-    if (!this.options['skip-welcome-message']) {
-      this.log(yosay('Hey you wanna make a damn email? Well, that\'s SWELL.'));
-    }
+    this.log(yosay('Hey you wanna make a damn email? Well, that\'s SWELL.'));
 
     var prompts = [{
       type: 'checkbox',
