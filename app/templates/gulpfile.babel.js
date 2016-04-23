@@ -21,6 +21,7 @@ gulp.task('styles', () => {<% if (includeSass) { %>
     .pipe(reload({stream: true}));
 });
 
+
 gulp.task('html', ['styles'], () => {
   return gulp.src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
