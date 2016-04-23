@@ -55,13 +55,6 @@ gulp.task('images', () => {
     .pipe(gulp.dest('dist/images'));
 });
 
-gulp.task('fonts', () => {
-  return gulp.src(require('main-bower-files')('**/*.{eot,svg,ttf,woff,woff2}', function (err) {})
-    .concat('app/fonts/**/*'))
-    .pipe(gulp.dest('.tmp/fonts'))
-    .pipe(gulp.dest('dist/fonts'));
-});
-
 gulp.task('extras', () => {
   return gulp.src([
     'app/*.*',
@@ -74,9 +67,9 @@ gulp.task('extras', () => {
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
 <% if (includeBabel) { -%>
-gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
+gulp.task('serve', ['styles', 'scripts'], () => {
 <% } else { -%>
-gulp.task('serve', ['styles', 'fonts'], () => {
+gulp.task('serve', ['styles'], () => {
 <% } -%>
   browserSync({
     notify: false,
@@ -94,15 +87,13 @@ gulp.task('serve', ['styles', 'fonts'], () => {
 <% if (!includeBabel) { -%>
     'app/scripts/**/*.js',
 <% } -%>
-    'app/images/**/*',
-    '.tmp/fonts/**/*'
+    'app/images/**/*'
   ]).on('change', reload);
 
   gulp.watch('app/styles/**/*.<%= includeSass ? 'scss' : 'css' %>', ['styles']);
 <% if (includeBabel) { -%>
   gulp.watch('app/scripts/**/*.js', ['scripts']);
 <% } -%>
-  gulp.watch('app/fonts/**/*', ['fonts']);
 });
 
 gulp.task('serve:dist', () => {
@@ -145,7 +136,7 @@ gulp.task('serve:test', () => {
 
 
 
-gulp.task('build', ['html', 'images', 'fonts', 'extras'], () => {
+gulp.task('build', ['html', 'images', 'extras'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
