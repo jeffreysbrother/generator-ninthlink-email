@@ -7,9 +7,9 @@
 
 Please see our [gulpfile](app/templates/gulpfile.babel.js) for up to date information on what we support.
 
+* gulp-inline-css
 * Built-in preview server with BrowserSync
 * Awesome image optimization
-* Automagically wire-up dependencies installed with [Bower](http://bower.io)
 * The gulpfile makes use of [ES2015 features](https://babeljs.io/docs/learn-es2015/) by using [Babel](https://babeljs.io)
 
 *For more information on what this generator can do for you, take a look at the [gulp plugins](app/templates/_package.json) used in our `package.json`.*
@@ -23,7 +23,6 @@ Please see our [gulpfile](app/templates/gulpfile.babel.js) for up to date inform
 - Run `gulp serve` to preview and watch for changes
 - Run `gulp` to build your webapp for production
 - Run `gulp serve:dist` to preview the production build
-
 
 
 ## License
