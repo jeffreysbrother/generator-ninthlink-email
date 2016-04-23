@@ -25,12 +25,12 @@ module.exports = generators.Base.extend({
   prompting: function () {
     var done = this.async();
 
-    this.log(yosay('Hey you wanna make a damn email? Well, that\'s SWELL.'));
+    this.log(yosay('You wanna make a damn email? Well, that\'s SWELL.'));
 
     var prompts = [{
       type: 'confirm',
       name: 'includeJQuery',
-      message: 'Would you like to include jQuery?',
+      message: 'Would you like to add a little love to this email?',
       default: false
     }];
 
@@ -103,22 +103,7 @@ module.exports = generators.Base.extend({
         this.templatePath('index.html'),
         this.destinationPath('app/index.html'),
         {
-          appname: this.appname,
-          includeJQuery: this.includeJQuery,
-          bsPlugins: [
-            'affix',
-            'alert',
-            'dropdown',
-            'tooltip',
-            'modal',
-            'transition',
-            'button',
-            'popover',
-            'carousel',
-            'scrollspy',
-            'collapse',
-            'tab'
-          ]
+          appname: this.appname
         }
       );
     }

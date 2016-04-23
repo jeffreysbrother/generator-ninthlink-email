@@ -7,14 +7,8 @@ import del from 'del';
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
-gulp.task('styles', () => {
-  return gulp.src('app/styles/*.css')
-    .pipe(gulp.dest('.tmp/styles'))
-    .pipe(reload({stream: true}));
-});
 
-
-gulp.task('html', ['styles'], () => {
+gulp.task('html', () => {
   return gulp.src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
@@ -45,7 +39,7 @@ gulp.task('extras', () => {
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
 
-gulp.task('serve', ['styles'], () => {
+gulp.task('serve', () => {
   browserSync({
     notify: false,
     port: 9000,
