@@ -111,20 +111,6 @@ module.exports = generators.Base.extend({
         this.destinationPath('.gitattributes'));
     },
 
-    bower: function () {
-      var bowerJson = {
-        name: _s.slugify(this.appname),
-        private: true,
-        dependencies: {}
-      };
-
-      this.fs.writeJSON('bower.json', bowerJson);
-      this.fs.copy(
-        this.templatePath('bowerrc'),
-        this.destinationPath('.bowerrc')
-      );
-    },
-
     editorConfig: function () {
       this.fs.copy(
         this.templatePath('editorconfig'),
@@ -133,18 +119,6 @@ module.exports = generators.Base.extend({
     },
 
     html: function () {
-      var bsPath;
-
-      // path prefix for Bootstrap JS files
-      if (this.includeBootstrap) {
-        bsPath = '/bower_components/';
-
-        if (this.includeSass) {
-          bsPath += 'bootstrap-sass/assets/javascripts/bootstrap/';
-        } else {
-          bsPath += 'bootstrap/js/';
-        }
-      }
 
       this.fs.copyTpl(
         this.templatePath('index.html'),
@@ -154,7 +128,6 @@ module.exports = generators.Base.extend({
           includeSass: this.includeSass,
           includeBootstrap: this.includeBootstrap,
           includeJQuery: this.includeJQuery,
-          bsPath: bsPath,
           bsPlugins: [
             'affix',
             'alert',
@@ -182,10 +155,9 @@ module.exports = generators.Base.extend({
   },
 
   end: function () {
-    var bowerJson = this.fs.readJSON(this.destinationPath('bower.json'));
     var howToInstall =
       '\nAfter running ' +
-      chalk.yellow.bold('npm install & bower install') +
+      chalk.yellow.bold('npm install') +
       ', inject your' +
       '\nfront end dependencies by running ' +
       chalk.yellow.bold('gulp wiredep') +
