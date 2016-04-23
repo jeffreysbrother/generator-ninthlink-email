@@ -15,13 +15,6 @@ Please see our [gulpfile](app/templates/gulpfile.babel.js) for up to date inform
 *For more information on what this generator can do for you, take a look at the [gulp plugins](app/templates/_package.json) used in our `package.json`.*
 
 
-## libsass
-
-Keep in mind that libsass is feature-wise not fully compatible with Ruby Sass. Check out [this](http://sass-compatibility.github.io) curated list of incompatibilities to find out which features are missing.
-
-If your favorite feature is missing and you really need Ruby Sass, you can always switch to [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) and update the `styles` task in gulpfile accordingly.
-
-
 ## Getting Started
 
 - Install dependencies: `npm install --global yo gulp-cli bower`
