@@ -3,7 +3,6 @@ import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import browserSync from 'browser-sync';
 import del from 'del';
-import {stream as wiredep} from 'wiredep';
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
@@ -104,7 +103,6 @@ gulp.task('serve', ['styles', 'fonts'], () => {
   gulp.watch('app/scripts/**/*.js', ['scripts']);
 <% } -%>
   gulp.watch('app/fonts/**/*', ['fonts']);
-  gulp.watch('bower.json', ['wiredep', 'fonts']);
 });
 
 gulp.task('serve:dist', () => {
@@ -145,22 +143,7 @@ gulp.task('serve:test', () => {
   gulp.watch('test/spec/**/*.js').on('change', reload);
 });
 
-// inject bower components
-gulp.task('wiredep', () => {<% if (includeSass) { %>
-  gulp.src('app/styles/*.scss')
-    .pipe(wiredep({
-      ignorePath: /^(\.\.\/)+/
-    }))
-    .pipe(gulp.dest('app/styles'));
-<% } %>
-  gulp.src('app/*.html')
-    .pipe(wiredep({<% if (includeBootstrap) { if (includeSass) { %>
-      exclude: ['bootstrap-sass'],<% } else { %>
-      exclude: ['bootstrap.js'],<% }} %>
-      ignorePath: /^(\.\.\/)*\.\./
-    }))
-    .pipe(gulp.dest('app'));
-});
+
 
 gulp.task('build', ['html', 'images', 'fonts', 'extras'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));

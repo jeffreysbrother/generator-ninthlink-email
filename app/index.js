@@ -2,7 +2,6 @@
 var generators = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
-var wiredep = require('wiredep');
 var mkdirp = require('mkdirp');
 var _s = require('underscore.string');
 
@@ -218,23 +217,9 @@ module.exports = generators.Base.extend({
       return;
     }
 
-    // wire Bower packages to .html
-    wiredep({
-      bowerJson: bowerJson,
-      directory: 'bower_components',
-      exclude: ['bootstrap-sass', 'bootstrap.js'],
-      ignorePath: /^(\.\.\/)*\.\./,
-      src: 'app/index.html'
-    });
 
     if (this.includeSass) {
-      // wire Bower packages to .scss
-      wiredep({
-        bowerJson: bowerJson,
-        directory: 'bower_components',
-        ignorePath: /^(\.\.\/)+/,
-        src: 'app/styles/*.scss'
-      });
+
     }
   }
 });

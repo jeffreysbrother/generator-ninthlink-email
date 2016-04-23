@@ -20,8 +20,7 @@
     "gulp-sass": "^2.0.0",<% } %>
     "gulp-size": "^1.2.1",
     "gulp-useref": "^3.0.0",
-    "main-bower-files": "^2.5.0",
-    "wiredep": "^2.2.2"
+    "main-bower-files": "^2.5.0"
   },
   "eslintConfig": {
     "env": {<% if (includeBabel) { %>
