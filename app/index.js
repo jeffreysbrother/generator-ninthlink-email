@@ -29,9 +29,9 @@ module.exports = generators.Base.extend({
 
     var prompts = [{
       type: 'confirm',
-      name: 'includeJQuery',
-      message: 'Would you like to add a little love to this email?',
-      default: false
+      name: 'includeAddress',
+      message: 'Would you like to include an address section below the footer?',
+      default: true
     }];
 
     this.prompt(prompts, function (answers) {
@@ -43,7 +43,7 @@ module.exports = generators.Base.extend({
 
       // manually deal with the response, get back and store the results.
       // we change a bit this way of doing to automatically do this in the self.prompt() method.
-      this.includeJQuery = answers.includeJQuery;
+      this.includeAddress = answers.includeAddress;
 
       done();
     }.bind(this));
@@ -103,9 +103,14 @@ module.exports = generators.Base.extend({
         this.templatePath('index.html'),
         this.destinationPath('app/index.html'),
         {
-          appname: this.appname
+          appname: this.appname,
+          includeAddress: this.includeAddress,
         }
       );
+    },
+    
+    misc: function () {
+      mkdirp('app/images');
     }
 
   },
