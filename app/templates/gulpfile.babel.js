@@ -21,22 +21,7 @@ gulp.task('styles', () => {<% if (includeSass) { %>
     .pipe(reload({stream: true}));
 });
 
-<% if (includeBabel) { -%>
-gulp.task('scripts', () => {
-  return gulp.src('app/scripts/**/*.js')
-    .pipe($.plumber())
-    .pipe($.babel())
-    .pipe(gulp.dest('.tmp/scripts'))
-    .pipe(reload({stream: true}));
-});
-<% } -%>
-
-
-<% if (includeBabel) { -%>
-gulp.task('html', ['styles', 'scripts'], () => {
-<% } else { -%>
 gulp.task('html', ['styles'], () => {
-<% } -%>
   return gulp.src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
@@ -66,11 +51,8 @@ gulp.task('extras', () => {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-<% if (includeBabel) { -%>
-gulp.task('serve', ['styles', 'scripts'], () => {
-<% } else { -%>
+
 gulp.task('serve', ['styles'], () => {
-<% } -%>
   browserSync({
     notify: false,
     port: 9000,
@@ -81,16 +63,10 @@ gulp.task('serve', ['styles'], () => {
 
   gulp.watch([
     'app/*.html',
-<% if (!includeBabel) { -%>
-    'app/scripts/**/*.js',
-<% } -%>
     'app/images/**/*'
   ]).on('change', reload);
 
   gulp.watch('app/styles/**/*.<%= includeSass ? 'scss' : 'css' %>', ['styles']);
-<% if (includeBabel) { -%>
-  gulp.watch('app/scripts/**/*.js', ['scripts']);
-<% } -%>
 });
 
 gulp.task('serve:dist', () => {
