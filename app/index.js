@@ -7,15 +7,8 @@ var _s = require('underscore.string');
 
 module.exports = generators.Base.extend({
   constructor: function () {
-    var testLocal;
 
     generators.Base.apply(this, arguments);
-
-    this.option('test-framework', {
-      desc: 'Test framework to be invoked',
-      type: String,
-      defaults: 'mocha'
-    });
 
     this.option('babel', {
       desc: 'Use Babel',
@@ -23,19 +16,6 @@ module.exports = generators.Base.extend({
       defaults: true
     });
 
-    if (this.options['test-framework'] === 'mocha') {
-      testLocal = require.resolve('generator-mocha/generators/app/index.js');
-    } else if (this.options['test-framework'] === 'jasmine') {
-      testLocal = require.resolve('generator-jasmine/generators/app/index.js');
-    }
-
-    this.composeWith(this.options['test-framework'] + ':app', {
-      options: {
-        'skip-install': this.options['skip-install']
-      }
-    }, {
-      local: testLocal
-    });
   },
 
   initializing: function () {
@@ -98,8 +78,7 @@ module.exports = generators.Base.extend({
           version: this.pkg.version,
           includeSass: this.includeSass,
           includeBootstrap: this.includeBootstrap,
-          includeBabel: this.options['babel'],
-          testFramework: this.options['test-framework']
+          includeBabel: this.options['babel']
         }
       );
     },

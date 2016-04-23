@@ -29,8 +29,6 @@
   ],
   "dependencies": {
     "chalk": "^1.0.0",
-    "generator-jasmine": "^0.2.1",
-    "generator-mocha": "^0.3.0",
     "mkdirp": "^0.5.1",
     "underscore.string": "^3.1.1",
     "wiredep": "^2.2.2",
@@ -39,7 +37,6 @@
     "yosay": "^1.0.0"
   },
   "devDependencies": {
-    "mocha": "*",
     "yeoman-test": "^1.1.0"
   }
 }
