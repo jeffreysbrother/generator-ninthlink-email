@@ -7,16 +7,8 @@ import del from 'del';
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
-gulp.task('styles', () => {<% if (includeSass) { %>
-  return gulp.src('app/styles/*.scss')
-    .pipe($.plumber())
-    .pipe($.sass.sync({
-      outputStyle: 'expanded',
-      precision: 10,
-      includePaths: ['.']
-    }).on('error', $.sass.logError))<% } else { %>
+gulp.task('styles', () => {
   return gulp.src('app/styles/*.css')
-    <% } %>
     .pipe(gulp.dest('.tmp/styles'))
     .pipe(reload({stream: true}));
 });
@@ -67,7 +59,6 @@ gulp.task('serve', ['styles'], () => {
     'app/images/**/*'
   ]).on('change', reload);
 
-  gulp.watch('app/styles/**/*.<%= includeSass ? 'scss' : 'css' %>', ['styles']);
 });
 
 gulp.task('serve:dist', () => {

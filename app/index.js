@@ -28,26 +28,10 @@ module.exports = generators.Base.extend({
     this.log(yosay('Hey you wanna make a damn email? Well, that\'s SWELL.'));
 
     var prompts = [{
-      type: 'checkbox',
-      name: 'features',
-      message: 'What more would you like?',
-      choices: [{
-        name: 'Sass',
-        value: 'includeSass',
-        checked: true
-      }, {
-        name: 'Bootstrap',
-        value: 'includeBootstrap',
-        checked: true
-      }]
-    }, {
       type: 'confirm',
       name: 'includeJQuery',
       message: 'Would you like to include jQuery?',
-      default: true,
-      when: function (answers) {
-        return answers.features.indexOf('includeBootstrap') === -1;
-      }
+      default: false
     }];
 
     this.prompt(prompts, function (answers) {
@@ -59,8 +43,6 @@ module.exports = generators.Base.extend({
 
       // manually deal with the response, get back and store the results.
       // we change a bit this way of doing to automatically do this in the self.prompt() method.
-      this.includeSass = hasFeature('includeSass');
-      this.includeBootstrap = hasFeature('includeBootstrap');
       this.includeJQuery = answers.includeJQuery;
 
       done();
@@ -76,8 +58,6 @@ module.exports = generators.Base.extend({
           date: (new Date).toISOString().split('T')[0],
           name: this.pkg.name,
           version: this.pkg.version,
-          includeSass: this.includeSass,
-          includeBootstrap: this.includeBootstrap,
           includeBabel: this.options['babel']
         }
       );
@@ -88,7 +68,6 @@ module.exports = generators.Base.extend({
         this.templatePath('_package.json'),
         this.destinationPath('package.json'),
         {
-          includeSass: this.includeSass,
           includeBabel: this.options['babel']
         }
       );
@@ -125,8 +104,6 @@ module.exports = generators.Base.extend({
         this.destinationPath('app/index.html'),
         {
           appname: this.appname,
-          includeSass: this.includeSass,
-          includeBootstrap: this.includeBootstrap,
           includeJQuery: this.includeJQuery,
           bsPlugins: [
             'affix',
@@ -168,9 +145,5 @@ module.exports = generators.Base.extend({
       return;
     }
 
-
-    if (this.includeSass) {
-
-    }
   }
 });
