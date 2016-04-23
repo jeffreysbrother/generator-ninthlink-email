@@ -3,6 +3,7 @@ import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import browserSync from 'browser-sync';
 import del from 'del';
+import inlineCss from 'gulp-inline-css';
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
@@ -12,6 +13,7 @@ gulp.task('html', () => {
   return gulp.src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
+    .pipe(inlineCss())
     .pipe(gulp.dest('dist'));
 });
 
