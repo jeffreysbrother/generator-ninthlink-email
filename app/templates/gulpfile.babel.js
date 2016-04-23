@@ -11,17 +11,13 @@ const reload = browserSync.reload;
 gulp.task('styles', () => {<% if (includeSass) { %>
   return gulp.src('app/styles/*.scss')
     .pipe($.plumber())
-    // .pipe($.sourcemaps.init())
     .pipe($.sass.sync({
       outputStyle: 'expanded',
       precision: 10,
       includePaths: ['.']
     }).on('error', $.sass.logError))<% } else { %>
   return gulp.src('app/styles/*.css')
-    // .pipe($.sourcemaps.init())
     <% } %>
-    // .pipe($.autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']}))
-    // .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/styles'))
     .pipe(reload({stream: true}));
 });
@@ -30,41 +26,12 @@ gulp.task('styles', () => {<% if (includeSass) { %>
 gulp.task('scripts', () => {
   return gulp.src('app/scripts/**/*.js')
     .pipe($.plumber())
-    // .pipe($.sourcemaps.init())
     .pipe($.babel())
-    // .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('.tmp/scripts'))
     .pipe(reload({stream: true}));
 });
 <% } -%>
 
-// function lint(files, options) {
-//   return gulp.src(files)
-//     .pipe(reload({stream: true, once: true}))
-//     .pipe($.eslint(options))
-//     .pipe($.eslint.format())
-//     .pipe($.if(!browserSync.active, $.eslint.failAfterError()));
-// }
-
-// gulp.task('lint', () => {
-//   return lint('app/scripts/**/*.js', {
-//     fix: true
-//   })
-//     .pipe(gulp.dest('app/scripts'));
-// });
-// gulp.task('lint:test', () => {
-//   return lint('test/spec/**/*.js', {
-//     fix: true,
-//     env: {
-// <% if (testFramework === 'mocha') { -%>
-//       mocha: true
-// <% } else if (testFramework === 'jasmine') { -%>
-//       jasmine: true
-// <% } -%>
-//     }
-//   })
-//     .pipe(gulp.dest('test/spec/**/*.js'));
-// });
 
 <% if (includeBabel) { -%>
 gulp.task('html', ['styles', 'scripts'], () => {
@@ -73,8 +40,6 @@ gulp.task('html', ['styles'], () => {
 <% } -%>
   return gulp.src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
-    // .pipe($.if('*.js', $.uglify()))
-    // .pipe($.if('*.css', $.cssnano({safe: true, autoprefixer: false})))
     .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
     .pipe(gulp.dest('dist'));
 });
@@ -178,7 +143,6 @@ gulp.task('serve:test', () => {
   gulp.watch('app/scripts/**/*.js', ['scripts']);
 <% } -%>
   gulp.watch('test/spec/**/*.js').on('change', reload);
-  // gulp.watch('test/spec/**/*.js', ['lint:test']);
 });
 
 // inject bower components
