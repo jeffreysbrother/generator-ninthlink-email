@@ -30,7 +30,7 @@ module.exports = generators.Base.extend({
     var prompts = [{
       type: 'confirm',
       name: 'includeAddress',
-      message: 'Would you like to include an address section below the footer?',
+      message: 'Include an address section below the footer?',
       default: true
     }];
 
@@ -104,7 +104,7 @@ module.exports = generators.Base.extend({
         this.destinationPath('app/index.html'),
         {
           appname: this.appname,
-          includeAddress: this.includeAddress,
+          includeAddress: this.includeAddress
         }
       );
     },
