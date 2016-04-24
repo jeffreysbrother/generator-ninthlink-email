@@ -1,6 +1,6 @@
 {
   "name": "generator-ninthlink-email",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Scaffold out an HTML email",
   "license": "BSD-2-Clause",
   "repository": "jeffreysbrother/generator-ninthlink-email",
@@ -22,7 +22,6 @@
     "ninthlink",
     "james cool",
     "inline-css",
-    "htmlmin",
     "gulp"
   ],
   "dependencies": {
