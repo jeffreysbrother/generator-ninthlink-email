@@ -11,8 +11,7 @@ const reload = browserSync.reload;
 
 gulp.task('html', () => {
   return gulp.src('app/*.html')
-    .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
-    // .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
+    .pipe($.useref({searchPath: ['app', '.']}))
     .pipe(inlineCss())
     .pipe(gulp.dest('dist'));
 });
@@ -38,7 +37,7 @@ gulp.task('extras', () => {
   }).pipe(gulp.dest('dist'));
 });
 
-gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
+gulp.task('clean', del.bind(null, ['dist']));
 
 
 gulp.task('serve', () => {
@@ -46,7 +45,7 @@ gulp.task('serve', () => {
     notify: false,
     port: 9000,
     server: {
-      baseDir: ['.tmp', 'app']
+      baseDir: ['app']
     }
   });
 
