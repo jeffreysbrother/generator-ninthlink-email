@@ -1,10 +1,10 @@
 {
   "name": "generator-ninthlink-email",
-  "version": "1.0.7",
-  "description": "Scaffold out an HTML email",
+  "version": "1.0.8",
+  "description": "a lean version of generator-webapp built for HTML emails",
   "license": "BSD-2-Clause",
   "repository": "jeffreysbrother/generator-ninthlink-email",
-  "author": "James Cool and The Yeoman Team",
+  "author": "The Yeoman Team and James Cool",
   "main": "app/index.js",
   "engines": {
     "node": ">=0.10.0",
