@@ -111,7 +111,28 @@ module.exports = generators.Base.extend({
     
     misc: function () {
       mkdirp('app/images');
-      mkdirp('dist/images');
+    }
+
+  },
+
+  install: function () {
+    this.installDependencies({
+      skipInstall: this.options['skip-install']
+    });
+  },
+
+  end: function () {
+    var howToInstall =
+      '\nAfter running ' +
+      chalk.yellow.bold('npm install') +
+      ', inject your' +
+      '\nfront end dependencies by running ' +
+      chalk.yellow.bold('gulp wiredep') +
+      '.';
+
+    if (this.options['skip-install']) {
+      this.log(howToInstall);
+      return;
     }
 
   }
