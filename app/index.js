@@ -72,6 +72,16 @@ module.exports = generators.Base.extend({
         }
       );
     },
+    
+    // if the bower.json file is not created, Yeoman will complain
+    bower: function () {
+      var bowerJson = {
+        name: 'html-email',
+        private: true,
+        dependencies: {}
+      };
+      this.fs.writeJSON('bower.json', bowerJson);
+    },
 
     babel: function () {
       this.fs.copy(
