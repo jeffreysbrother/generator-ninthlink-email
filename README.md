@@ -1,5 +1,7 @@
 # Email generator
 
+[![Join the chat at https://gitter.im/jeffreysbrother/generator-ninthlink-email](https://badges.gitter.im/jeffreysbrother/generator-ninthlink-email.svg)](https://gitter.im/jeffreysbrother/generator-ninthlink-email?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 > [Yeoman](http://yeoman.io) generator that scaffolds out an HTML email using [gulp](http://gulpjs.com/) for the build process
 
 
