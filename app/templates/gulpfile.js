@@ -1,7 +1,7 @@
 // generated on <%= date %> using <%= name %> <%= version %>
 const gulp = require('gulp');
 const gulpLoadPlugins = require('gulp-load-plugins');
-const browserSync = require('browser-sync');
+const browserSync = require('browser-sync').create();
 const del = require('del');
 const inlineCss = require('gulp-inline-css');
 
@@ -41,7 +41,7 @@ gulp.task('clean', del.bind(null, ['dist']));
 
 
 gulp.task('serve', () => {
-  browserSync({
+  browserSync.init({
     notify: false,
     port: 9000,
     server: {
@@ -57,7 +57,7 @@ gulp.task('serve', () => {
 });
 
 gulp.task('serve:dist', () => {
-  browserSync({
+  browserSync.init({
     notify: false,
     port: 9000,
     server: {
