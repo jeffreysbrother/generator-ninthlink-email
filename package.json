@@ -1,6 +1,6 @@
 {
   "name": "generator-ninthlink-email",
-  "version": "1.0.10",
+  "version": "1.1.0",
   "description": "a lean version of generator-webapp built for HTML emails",
   "license": "BSD-2-Clause",
   "repository": "jeffreysbrother/generator-ninthlink-email",
@@ -26,10 +26,10 @@
     "mkdirp": "^0.5.1",
     "underscore.string": "^3.1.1",
     "yeoman-assert": "^2.1.1",
-    "yeoman-generator": "^0.22.5",
-    "yosay": "^1.0.0"
+    "yeoman-generator": "^0.24.1",
+    "yosay": "^1.2.0"
   },
   "devDependencies": {
-    "yeoman-test": "^1.1.0"
+    "yeoman-test": "^1.5.0"
   }
 }

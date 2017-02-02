@@ -5,7 +5,7 @@
 
 ## Generator Features
 
-Please see our [gulpfile](app/templates/gulpfile.babel.js) for up to date information on what we support.
+Please see our [gulpfile](app/templates/gulpfile.js) for up to date information on what we support.
 
 * gulp-inline-css
 * Built-in preview server with BrowserSync

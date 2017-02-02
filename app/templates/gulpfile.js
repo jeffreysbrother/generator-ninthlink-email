@@ -1,9 +1,9 @@
 // generated on <%= date %> using <%= name %> <%= version %>
-import gulp from 'gulp';
-import gulpLoadPlugins from 'gulp-load-plugins';
-import browserSync from 'browser-sync';
-import del from 'del';
-import inlineCss from 'gulp-inline-css';
+const gulp = require('gulp');
+const gulpLoadPlugins = require('gulp-load-plugins');
+const browserSync = require('browser-sync');
+const del = require('del');
+const inlineCss = require('gulp-inline-css');
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;

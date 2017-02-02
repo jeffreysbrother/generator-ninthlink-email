@@ -23,8 +23,6 @@ module.exports = generators.Base.extend({
   },
 
   prompting: function () {
-    var done = this.async();
-
     this.log(yosay('You wanna make a damn email? Well, that\'s SWELL.'));
 
     var prompts = [{
@@ -34,7 +32,7 @@ module.exports = generators.Base.extend({
       default: true
     }];
 
-    this.prompt(prompts, function (answers) {
+    return this.prompt(prompts).then(function (answers) {
       var features = answers.features;
 
       function hasFeature(feat) {
@@ -45,15 +43,14 @@ module.exports = generators.Base.extend({
       // we change a bit this way of doing to automatically do this in the self.prompt() method.
       this.includeAddress = answers.includeAddress;
 
-      done();
     }.bind(this));
   },
 
   writing: {
     gulpfile: function () {
       this.fs.copyTpl(
-        this.templatePath('gulpfile.babel.js'),
-        this.destinationPath('gulpfile.babel.js'),
+        this.templatePath('gulpfile.js'),
+        this.destinationPath('gulpfile.js'),
         {
           date: (new Date).toISOString().split('T')[0],
           name: this.pkg.name,
@@ -72,7 +69,7 @@ module.exports = generators.Base.extend({
         }
       );
     },
-    
+
     // if the bower.json file is not created, Yeoman will complain
     bower: function () {
       var bowerJson = {
@@ -118,7 +115,7 @@ module.exports = generators.Base.extend({
         }
       );
     },
-    
+
     misc: function () {
       mkdirp('app/images');
     }
