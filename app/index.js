@@ -1,14 +1,15 @@
 'use strict';
-var generators = require('yeoman-generator');
-var yosay = require('yosay');
-var chalk = require('chalk');
-var mkdirp = require('mkdirp');
-var _s = require('underscore.string');
+const Generator = require('yeoman-generator');
+const yosay = require('yosay');
+const chalk = require('chalk');
+const mkdirp = require('mkdirp');
+const _s = require('underscore.string');
 
-module.exports = generators.Base.extend({
-  constructor: function () {
+module.exports = class extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
 
-    generators.Base.apply(this, arguments);
+    // generators.Base.apply(this, arguments);
 
     this.option('babel', {
       desc: 'Use Babel',
@@ -16,13 +17,13 @@ module.exports = generators.Base.extend({
       defaults: false
     });
 
-  },
+  }
 
-  initializing: function () {
+  initializing() {
     this.pkg = require('../package.json');
-  },
+  }
 
-  prompting: function () {
+  prompting() {
     this.log(yosay('You wanna make a damn email? Well, that\'s SWELL.'));
 
     var prompts = [{
@@ -44,91 +45,99 @@ module.exports = generators.Base.extend({
       this.includeAddress = answers.includeAddress;
 
     }.bind(this));
-  },
+  }
 
-  writing: {
-    gulpfile: function () {
-      this.fs.copyTpl(
-        this.templatePath('gulpfile.js'),
-        this.destinationPath('gulpfile.js'),
-        {
-          date: (new Date).toISOString().split('T')[0],
-          name: this.pkg.name,
-          version: this.pkg.version,
-          includeBabel: this.options['babel']
-        }
-      );
-    },
+  writing() {
+    this._gulpfile();
+    this._packageJSON();
+    this._bower();
+    this._babel();
+    this._git();
+    this._editorConfig();
+    this._html();
+    this._misc();
+  }
 
-    packageJSON: function () {
-      this.fs.copyTpl(
-        this.templatePath('_package.json'),
-        this.destinationPath('package.json'),
-        {
-          includeBabel: this.options['babel']
-        }
-      );
-    },
+  _gulpfile() {
+    this.fs.copyTpl(
+      this.templatePath('gulpfile.js'),
+      this.destinationPath('gulpfile.js'),
+      {
+        date: (new Date).toISOString().split('T')[0],
+        name: this.pkg.name,
+        version: this.pkg.version,
+        includeBabel: this.options['babel']
+      }
+    );
+  }
 
-    // if the bower.json file is not created, Yeoman will complain
-    bower: function () {
-      var bowerJson = {
-        name: 'html-email',
-        private: true,
-        dependencies: {}
-      };
-      this.fs.writeJSON('bower.json', bowerJson);
-    },
+  _packageJSON() {
+    this.fs.copyTpl(
+      this.templatePath('_package.json'),
+      this.destinationPath('package.json'),
+      {
+        includeBabel: this.options['babel']
+      }
+    );
+  }
 
-    babel: function () {
-      this.fs.copy(
-        this.templatePath('babelrc'),
-        this.destinationPath('.babelrc')
-      );
-    },
+  // if the bower.json file is not created, Yeoman will complain
+  _bower() {
+    var bowerJson = {
+      name: 'html-email',
+      private: true,
+      dependencies: {}
+    };
+    this.fs.writeJSON('bower.json', bowerJson);
+  }
 
-    git: function () {
-      this.fs.copy(
-        this.templatePath('gitignore'),
-        this.destinationPath('.gitignore'));
+  _babel() {
+    this.fs.copy(
+      this.templatePath('babelrc'),
+      this.destinationPath('.babelrc')
+    );
+  }
 
-      this.fs.copy(
-        this.templatePath('gitattributes'),
-        this.destinationPath('.gitattributes'));
-    },
+  _git() {
+    this.fs.copy(
+      this.templatePath('gitignore'),
+      this.destinationPath('.gitignore'));
 
-    editorConfig: function () {
-      this.fs.copy(
-        this.templatePath('editorconfig'),
-        this.destinationPath('.editorconfig')
-      );
-    },
+    this.fs.copy(
+      this.templatePath('gitattributes'),
+      this.destinationPath('.gitattributes'));
+  }
 
-    html: function () {
+  _editorConfig() {
+    this.fs.copy(
+      this.templatePath('editorconfig'),
+      this.destinationPath('.editorconfig')
+    );
+  }
 
-      this.fs.copyTpl(
-        this.templatePath('index.html'),
-        this.destinationPath('app/index.html'),
-        {
-          appname: this.appname,
-          includeAddress: this.includeAddress
-        }
-      );
-    },
+  _html() {
 
-    misc: function () {
-      mkdirp('app/images');
-    }
+    this.fs.copyTpl(
+      this.templatePath('index.html'),
+      this.destinationPath('app/index.html'),
+      {
+        appname: this.appname,
+        includeAddress: this.includeAddress
+      }
+    );
+  }
 
-  },
+  _misc() {
+    mkdirp('app/images');
+  }
 
-  install: function () {
+  install() {
     this.installDependencies({
       skipInstall: this.options['skip-install']
     });
-  },
+  }
 
-  end: function () {
+  end() {
     var howToInstall =
       '\nAfter running ' +
       chalk.yellow.bold('npm install') +
@@ -143,4 +152,4 @@ module.exports = generators.Base.extend({
     }
 
   }
-});
+}
